@@ -754,3 +754,30 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
+
+
+
+function exp_240806_ST_Martin_1rule0_eval_expression(context) {
+    // Name IS NULL
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['Name']  === null);
+    } else {
+        return (feature['Name']  === null);
+    }
+}
+
+
+function exp_240806_ST_Martin_1rule1_eval_expression(context) {
+    // Name IS NOT NULL
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['Name']  !== null);
+    } else {
+        return (feature['Name']  !== null);
+    }
+}

@@ -58,7 +58,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[51.14418142271216,6.699600736702712],[51.171237955600624,6.767665752827307]]);
+        }).fitBounds([[51.14476773757751,6.698658160834982],[51.17182479951265,6.766724531514284]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -246,19 +246,6 @@
         });
         lay.addTo(map);
         setBounds();
-        var i = 0;
-        layer_Sammelbezirke_2.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['Straße'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Liberation Sans\', sans-serif;">' + layer.feature.properties['Straße']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Sammelbezirke_2'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
         resetLabels([layer_Sammelbezirke_2]);
         map.on("zoomend", function(){
             resetLabels([layer_Sammelbezirke_2]);

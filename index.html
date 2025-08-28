@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet.photon.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -37,8 +37,8 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.wms.js"></script>
-        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="data/Sammelbezirke_2.js"></script>
+        <script src="js/leaflet.photon.js"></script>
+        <script src="data/Sammelbezirke_2025_1.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -58,7 +58,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[51.14489975569209,6.70424140630555],[51.16921798552961,6.758765022056014]]);
+        }).fitBounds([[51.14603528371617,6.706358413450191],[51.17012561257496,6.767681336749755]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -121,22 +121,8 @@
             identify: false,
             attribution: '',
         });
-        map.createPane('pane_Hintergrundgrau_1');
-        map.getPane('pane_Hintergrundgrau_1').style.zIndex = 401;
-        var layer_Hintergrundgrau_1 = L.WMS.layer("https://sgx.geodatenzentrum.de/wms_topplus_open", "web_grau", {
-            pane: 'pane_Hintergrundgrau_1',
-            format: 'image/png',
-            uppercase: true,
-            transparent: true,
-            continuousWorld : true,
-            tiled: true,
-            info_format: 'text/html',
-            opacity: 1,
-            identify: false,
-            attribution: '',
-        });
-        map.addLayer(layer_Hintergrundgrau_1);
-        function pop_Sammelbezirke_2(feature, layer) {
+        map.addLayer(layer_Hintergrundfarbig_0);
+        function pop_Sammelbezirke_2025_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -157,11 +143,11 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Straße</th>\
-                        <td>' + (feature.properties['Straße'] !== null ? autolinker.link(feature.properties['Straße'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['Straße'] !== null ? autolinker.link(String(feature.properties['Straße']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Name</th>\
-                        <td class="visible-with-data" id="Name">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                        <td class="visible-with-data" id="Name">' + (feature.properties['Name'] !== null ? autolinker.link(String(feature.properties['Name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -170,28 +156,28 @@
 			});
 			layer.bindPopup(content, { maxHeight: 400 });
         }
-        function style_Sammelbezirke_2_0(feature) {
+        function style_Sammelbezirke_2025_1_0(feature) {
             var context = {
                 feature: feature,
                 variables: {}
             };
             // Start of if blocks and style check logic
-            if (exp_Sammelbezirke_2rule0_eval_expression(context)) {
+            if (exp_Sammelbezirke_2025_1rule0_eval_expression(context)) {
                   return {
-                pane: 'pane_Sammelbezirke_2',
+                pane: 'pane_Sammelbezirke_2025_1',
                 opacity: 1,
-                color: 'rgba(255,62,60,1.0)',
+                color: 'rgba(227,26,28,1.0)',
                 dashArray: '',
-                lineCap: 'round',
-                lineJoin: 'round',
+                lineCap: 'square',
+                lineJoin: 'bevel',
                 weight: 7.0,
                 fillOpacity: 0,
                 interactive: true,
             };
                 }
-                else if (exp_Sammelbezirke_2rule1_eval_expression(context)) {
+                else if (exp_Sammelbezirke_2025_1rule1_eval_expression(context)) {
                   return {
-                pane: 'pane_Sammelbezirke_2',
+                pane: 'pane_Sammelbezirke_2025_1',
                 opacity: 1,
                 color: 'rgba(31,117,13,1.0)',
                 dashArray: '',
@@ -206,34 +192,22 @@
                 return {fill: false, stroke: false};
             }
         }
-        map.createPane('pane_Sammelbezirke_2');
-        map.getPane('pane_Sammelbezirke_2').style.zIndex = 402;
-        map.getPane('pane_Sammelbezirke_2').style['mix-blend-mode'] = 'normal';
-        var layer_Sammelbezirke_2 = new L.geoJson(json_Sammelbezirke_2, {
+        map.createPane('pane_Sammelbezirke_2025_1');
+        map.getPane('pane_Sammelbezirke_2025_1').style.zIndex = 401;
+        map.getPane('pane_Sammelbezirke_2025_1').style['mix-blend-mode'] = 'normal';
+        var layer_Sammelbezirke_2025_1 = new L.geoJson(json_Sammelbezirke_2025_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Sammelbezirke_2',
-            layerName: 'layer_Sammelbezirke_2',
-            pane: 'pane_Sammelbezirke_2',
-            onEachFeature: pop_Sammelbezirke_2,
-            style: style_Sammelbezirke_2_0,
+            dataVar: 'json_Sammelbezirke_2025_1',
+            layerName: 'layer_Sammelbezirke_2025_1',
+            pane: 'pane_Sammelbezirke_2025_1',
+            onEachFeature: pop_Sammelbezirke_2025_1,
+            style: style_Sammelbezirke_2025_1_0,
         });
-        bounds_group.addLayer(layer_Sammelbezirke_2);
-        map.addLayer(layer_Sammelbezirke_2);
-        var osmGeocoder = new L.Control.Geocoder({
-            collapsed: true,
-            position: 'topleft',
-            text: 'Search',
-            title: 'Testing'
-        }).addTo(map);
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .className += ' fa fa-search';
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
-        var baseMaps = {};
+        bounds_group.addLayer(layer_Sammelbezirke_2025_1);
+        map.addLayer(layer_Sammelbezirke_2025_1);
         var overlaysTree = [
-            {label: 'Sammelbezirke<br /><table><tr><td style="text-align: center;"><img src="legend/Sammelbezirke_2_keinSammlung0.png" /></td><td>kein Sammlung</td></tr><tr><td style="text-align: center;"><img src="legend/Sammelbezirke_2_Sammlung1.png" /></td><td>Sammlung</td></tr></table>', layer: layer_Sammelbezirke_2},
-            {label: "Hintergrund grau", layer: layer_Hintergrundgrau_1},
+            {label: 'Sammelbezirke_2025<br /><table><tr><td style="text-align: center;"><img src="legend/Sammelbezirke_2025_1_keineSammlung0.png" /></td><td>keine Sammlung</td></tr><tr><td style="text-align: center;"><img src="legend/Sammelbezirke_2025_1_Sammlung1.png" /></td><td>Sammlung</td></tr></table>', layer: layer_Sammelbezirke_2025_1},
             {label: "Hintergrund farbig", layer: layer_Hintergrundfarbig_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -246,15 +220,15 @@
         });
         lay.addTo(map);
         setBounds();
-        resetLabels([layer_Sammelbezirke_2]);
+        resetLabels([layer_Sammelbezirke_2025_1]);
         map.on("zoomend", function(){
-            resetLabels([layer_Sammelbezirke_2]);
+            resetLabels([layer_Sammelbezirke_2025_1]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Sammelbezirke_2]);
+            resetLabels([layer_Sammelbezirke_2025_1]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Sammelbezirke_2]);
+            resetLabels([layer_Sammelbezirke_2025_1]);
         });
         </script>
     </body>
